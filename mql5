@@ -1,0 +1,130 @@
+
+//+------------------------------------------------------------------+
+//|                                                   Gold Dragon MT4 |
+//|                                      Developer: Forex Robot Easy Team |
+//|                                        Website: forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+// Global variables
+double stopLoss = 50; // Stop Loss in pips
+double takeProfit = 100; // Take Profit in pips
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                  Expert Advisor Function Definitions               |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Function to calculate the trend power of daily candles
+double CalculateTrendPower()
+{
+    // Add your advanced trend analysis algorithm here
+    // Return the calculated trend power
+}
+
+// Function to open a buy trade
+void OpenBuyTrade()
+{
+    // Add code to open a buy trade here
+    // Use the CalculateTrendPower() function to determine the trend power
+    
+    // Set the Stop Loss and Take Profit levels for the trade
+    double sl = Bid - stopLoss * Point;
+    double tp = Bid + takeProfit * Point;
+    
+    // Add code to execute the buy trade with the specified Stop Loss and Take Profit levels
+}
+
+// Function to open a sell trade
+void OpenSellTrade()
+{
+    // Add code to open a sell trade here
+    // Use the CalculateTrendPower() function to determine the trend power
+    
+    // Set the Stop Loss and Take Profit levels for the trade
+    double sl = Ask + stopLoss * Point;
+    double tp = Ask - takeProfit * Point;
+    
+    // Add code to execute the sell trade with the specified Stop Loss and Take Profit levels
+}
+
+// Function to close all open trades
+void CloseAllTrades()
+{
+    // Add code to close all open trades here
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                Expert Advisor Initialization Function             |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Initialization function called once when the EA is loaded
+int OnInit()
+{
+    // Add code for initialization here
+    
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                      Expert Advisor Start Function                |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Start function called for every tick
+void OnTick()
+{
+    // Add code to check for trading opportunities here
+    
+    // Check if there are any open trades
+    if (PositionsTotal() > 0)
+    {
+        // Close all open trades
+        CloseAllTrades();
+    }
+    else
+    {
+        // Calculate the trend power
+        double trendPower = CalculateTrendPower();
+        
+        // Check the trend power and open trades accordingly
+        if (trendPower > 0)
+        {
+            OpenBuyTrade();
+        }
+        else if (trendPower < 0)
+        {
+            OpenSellTrade();
+        }
+    }
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                 Expert Advisor Deinitialization Function           |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Deinitialization function called once when the EA is unloaded
+void OnDeinit(const int reason)
+{
+    // Add code for deinitialization here
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                         Expert Advisor Program                     |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Entry point of the Expert Advisor program
+void OnStart()
+{
+    // Add code for starting the EA here
+    
+    // Run the EA on every tick
+    OnTick();
+}
